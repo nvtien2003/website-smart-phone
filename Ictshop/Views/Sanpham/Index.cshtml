@@ -1,0 +1,43 @@
+﻿@model PagedList.IPagedList<Ictshop.Models.Sanpham>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Danh sách sản phẩm</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Tensp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Giatien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Anhbia)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tensp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Giatien)
+            </td>
+            <td>
+                <img src="@item.Anhbia" alt="@item.Tensp" style="width:100px;height:100px;" />
+            </td>
+        </tr>
+}
+
+</table>
+
+<div>
+    @Html.PagedListPager(Model, page => @Url.Action("Sanpham","Index", new { page }))
+</div>
+

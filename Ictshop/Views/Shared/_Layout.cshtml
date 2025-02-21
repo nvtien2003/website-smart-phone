@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Điện thoại rẻ Thanh Hóa</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel=" stylesheet" href="~/Content/Style.css" />
+    <link rel="stylesheet" href="~/Content/jcarousel.css" />
+    <link rel="stylesheet" href="~/Content/camera.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+    <style type="text/css">
+        body {
+            background-color: #F0F0F0;
+            margin-top: 65px;
+        }
+
+        .navbar-inverse {
+            background-color: brown;
+            border-color: white;
+        }
+
+        .top_header {
+            padding-left: 10px;
+            color: white;
+        }
+
+        .form-inline {
+            float: right;
+            padding-top: 10px;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+            font-size: x-large;
+        }
+
+        .navbar-inverse .navbar-brand {
+            color: white;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+            font-size: large;
+        }
+
+            .navbar-inverse .navbar-nav > li > a:hover {
+                color: black;
+            }
+
+        .navbar-brand {
+            color: cadetblue;
+        }
+
+        .spnoibat {
+            background-color: white;
+        }
+
+            .spnoibat h3 {
+                padding-left: 30px;
+            }
+
+        .giohang {
+            color: white;
+        }
+
+        .bg-danger {
+            background-color: brown;
+        }
+
+        input {
+            background-color: #FF9933;
+            border: 3px solid #FF8000;
+            border-radius: 12px;
+            color: antiquewhite;
+        }
+
+        .btn {
+            background-color: brown;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            width: 200px;
+            height: 130px;
+            background-color: brown;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            margin-top:-5px;
+        }
+
+            .dropdown-menu a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-menu a:hover {
+                    background-color: #f1f1f1
+                }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown:hover .btn {
+            background-color: brown;
+            border: 1px solid
+        }
+
+        .dropdown-menu > li > a {
+            font-size: 23px !important;
+            color: whitesmoke
+        }
+
+        .dropdown-menu > li {
+            height: 36px;
+        }
+        .col-md-3 {
+            background-color: white;
+            border-left: 10px solid #F0F0F0 !important;
+        }
+        .control-label {
+            background-color: #F0F0F0;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+    @{ var u = Session["use"] as Ictshop.Models.Nguoidung; }
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="top_header col-md-12">
+
+            <div class="row" style="display: flex; flex-wrap: nowrap; flex-direction: row; align-content: space-around;">
+                @*<div class="col-sm-2"><img class="navbar-brand" src="~/HinhanhSP/logo1.jpg" width="20" height="20" style="padding:0" /></div>*@
+
+
+                <div class="col-sm-4 col-md-0" style=" width: 20.3333%; margin-right: 20px;">
+                    @Html.Action("GioHangPartial", "GioHang", new { @class = "giohang" })
+
+                </div>
+                @*@Html.Action("GioHangPartial", "GioHang",new { @style = "color:while" })*@
+                @{ if (u != null)
+                    {
+                        <div class="col-sm-4 col-md-0" style="width: 75.333333%;">
+                            <a style="color:white" href="@Url.Action("Profile", "User", new { id = u.MaNguoiDung })"> Xin chào : @u.Email</a>
+                            &nbsp;
+                            @*@Html.ActionLink("ĐĂNG XUẤT", "DangXuat", "User", new { style = "color:red" })*@
+
+                            <a style="color:red" href="/User/DangXuat"> ĐĂNG XUẤT</a>
+                        </div> }
+                    else
+                    {
+                        <div class="col-sm-4 col-md-0">
+                            <a style="color:white" href="/User/Dangky"> Đăng ký</a>
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-4 col-md-0" style="width:45%; margin-top:-14px;">
+                            <a style="color:white" href="/User/Dangnhap">
+                                Đăng nhập
+                                <img src="~/HinhanhSP/icon-admin.png" alt="Admin" style="width: 42px; height: 38px; vertical-align: middle; margin-right: 5px;" />
+                            </a>
+                        </div> } }
+
+
+            </div>
+
+        </div>
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img class="navbar-brand" src="~/HinhanhSP/logo-shop.png" width="50" height="50" style="padding: 0; width: 27%; height: 72px; margin-top: -20px;font-size:15px;" />
+                @Html.ActionLink("Smart","Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <form class="form-inline my-2 my-lg-0" style="float: left; margin-top: -5px;">
+                    <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm sản phẩm..." aria-label="Search" style="height:48px;">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style=" background-color: rgb(220, 146, 95); height: 48px; ">Search</button>
+
+                    @RenderSection("Scripts", required: false)  <!-- Section cho scripts -->
+                </form>
+            </div>
+
+            <div class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav">
+
+                    <li>
+                        <div class="dropdown">
+                            <a href="#" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span>ĐIỆN THOẠI</span>
+                            </a>
+
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="@Url.Action("ShowIphone", "Sanpham")">Apple</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ShowSamsung", "Sanpham")">Samsung</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ShowXiaomi", "Sanpham")">Xiaomi</a></li>
+                            </ul>
+                        </div>
+
+                        @*<span><i class=" glyphicon-music "></i> </span>
+                            <br />
+                            <span>@Html.ActionLink("Trang chủ", "Index", "Home") </span>*@
+                    </li>
+                    <li>
+                        <a href="#" title="LAPTOP">
+                            @*<span><i class="fas fa-tablet"></i></span>*@
+                            <span>LAPTOP</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="#" title="PHUKIEN">
+                            @*<span><i class="fas fa-desktop"></i></span>*@
+                            <span>PHỤ KIỆN</span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/Contact" title="LIENHE">
+                            @*<span><i class="fas fa-headphones"></i></span>*@
+                            <span>LIÊN HỆ</span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a style="color:white"
+                           class="nav-link"
+                           href="@Url.Action("Index", "DonHangs")">ĐƠN HÀNG</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div>
+            <img class="img-responsive" src="~/HinhanhSP/ban2.jpg" />
+        </div>
+        <br />
+    </div>
+    <footer>
+        <div class="content-wrap">
+            <div class="one-fourth first">
+                <h4>Bảo hành</h4>
+                <ul>
+                    <li><a href="#">Chính sách mua hàng</a></li>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Trung tâm bảo hành</a></li>
+                    <li><a href="#">Tra cứu bảo hành</a></li>
+                </ul>
+            </div>
+            <div class="one-fourth">
+                <h4>Liên kết</h4>
+                <ul>
+                    <li><a href="#">Tin tức </a></li>
+                    <li><a href="#">Lập trình Web</a></li>
+                    <li><a href="#">GenkVN</a></li>
+                    <li><a href="#">Dân trí</a></li>
+
+                </ul>
+            </div>
+            <div class="one-fourth">
+                <h4>Thông tin</h4>
+                <ul>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Góp ý</a></li>
+                    <li><a href="#">Tra cứu</a></li>
+
+                </ul>
+            </div>
+
+            <div class="one-fourth">
+                <h4>Tài khoản</h4>
+                <ul>
+                    <li><a href="#">Tài khoản của tôi</a></li>
+                    <li><a href="#">Lịch sử giao dịch</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="content-wrap">
+            <div style="clear:both; display:block;" class="social-wrap"></div>
+            <ul class="social">
+                <li><a href="#" class="tip" title="Facebook"><img src="~/HinhanhSP/social/social-icon-facebook.png" alt="Facebook"></a></li>
+                <li><a href="#" class="tip" title="Dribbble"><img src="~/HinhanhSP/social/social-icon-dribbble.png" alt="Dribbble"></a></li>
+                <li><a href="#" class="tip" title="Flickr"><img src="~/HinhanhSP/social/social-icon-flickr.png" alt="Flickr"></a></li>
+                <li><a href="#" class="tip" title="Pinterest"><img src="~/HinhanhSP/social/social-icon-pinterest.png" alt="Pinterest"></a></li>
+                <li><a href="#" class="tip" title="Twitter"><img src="~/HinhanhSP/social/social-icon-twitter.png" alt="Twitter"></a></li>
+                <li><a href="#" class="tip" title="RSS"><img src="~/HinhanhSP/social/social-icon-rss.png" alt="RSS"></a></li>
+            </ul>
+            <ul class="payment">
+                <li><a href="#" class="tip" title="Paypal"><img src="~/HinhanhSP/payment/payment-icon-paypal.png" alt="Paypal"></a></li>
+                <li><a href="#" class="tip" title="Master Card"><img src="~/HinhanhSP/payment/payment-icon-mastercard.png" alt="Master Card"></a></li>
+                <li><a href="#" class="tip" title="Visa"><img src="~/HinhanhSP/payment/payment-icon-visa.png" alt="Visa"></a></li>
+            </ul>
+            <p style="clear:both; display:block;">&copy; 2024 <a href="index-2.html">Điện thoại di động Smart</a>, Thiết kế bởi: <a href="#">Nguyễn Văn Tiền- Hồ Hữu Nhân</a></p>
+        </div>
+    </footer>
+
+
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿@using Ictshop.Models
+@model Sanpham
+
+
+@{
+    ViewBag.Title = "xemchitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    // Thêm đoạn này để thay thế ký tự xuống dòng bằng thẻ <br>
+    var formattedMota = Model.Mota.Replace("\n", "<br/>");
+}
+
+<br />
+
+<CENTER>
+    <div>
+        <h2>CHI TIẾT SẢN PHẨM</h2>
+        <img src="@Url.Content("~" +@Model.Anhbia)" />
+        <br />
+        <h3> @Model.Tensp</h3>
+        <h3 style="color:red">Giá: @String.Format("{0:0,0}", @Model.Giatien) VND</h3>
+        <br />
+        @Html.Raw(formattedMota)
+        <br />
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = Model.Masp, @strURL = Request.Url.ToString() }))
+        {
+    <input type="submit" value="Mua hàng" id="bgnGioHang" />}
+
+    </div>
+</CENTER>

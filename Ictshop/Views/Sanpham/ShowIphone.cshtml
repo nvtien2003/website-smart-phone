@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Ictshop.Models.Sanpham>
+
+@{
+    ViewBag.Title = "ShowIphone";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Products Apple</h1>
+
+<div class="product-category">
+    <a href="@Url.Action("Index", new { category = "Iphone" })">Iphone</a>
+    <!-- Add more categories as needed -->
+</div>
+
+<div class="product-list" style=" display: flex; flex-wrap: nowrap; align-content: stretch; text-align: center; height: 512px;">
+    @foreach (var product in Model)
+    {
+<div class="col-md-3 col-sm-6">
+    <a href="@Url.Action("xemchitiet", new {Masp=product.Masp })">
+        <img src=@Url.Content("~" +product.Anhbia.ToString()) class="img-responsive" alt="" width="400" height="400" style="margin-top:25px;" />
+    </a>
+        <center>
+        <h3>@product.Tensp</h3>
+        <h3 style="color:red">Giá: @String.Format("{0:0,0}", product.Giatien) VND</h3>
+        <br />
+        @using (Html.BeginForm("ThemGioHang", "GioHang", new { iMasp = product.Masp, @strURL = Request.Url.ToString() }))
+        {
+                <input type="submit" value="Mua hàng" id="bgnGioHang" class="btn btn-primary"/>}
+        @*<a href="@Url.Action("xemchitiet", new {@Masp=item.Masp })">Xem chi tiết</a>*@
+         </center>
+
+</div>}
+</div>

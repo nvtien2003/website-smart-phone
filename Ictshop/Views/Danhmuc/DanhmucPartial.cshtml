@@ -1,0 +1,21 @@
+﻿@using Ictshop.Models;
+@model List<Hangsanxuat>
+
+
+<br />
+
+<div class="bg-success">
+
+    <h3 style="width: 35%; text-align: center; margin-top: 16px; color: white;"> DANH MỤC  </h3>
+
+    <div class="row" style=" display: flex; justify-content: space-between; flex-wrap: nowrap; flex-direction: row; width: 55%; margin-top: 10px; text-align: center; ">
+
+        @foreach (var item in Model)
+        {
+<div class="col-lg-1" style="width: 35.333333%;">
+    <a href="@Url.Action("dt"+ @item.Tenhang +"Partial", "Sanpham", new { Mahang = item.Mahang })"> @item.Tenhang</a>
+
+
+</div>}
+    </div>
+</div>

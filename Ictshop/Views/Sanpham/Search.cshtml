@@ -1,0 +1,51 @@
+﻿@model Ictshop.Models.Sanpham
+@using Ictshop.Models;
+@using System.Linq;
+
+@{ 
+    ViewBag.Title = "Kết quả tìm kiếm";
+}
+@using (Html.BeginForm("Search", "Sanpham", FormMethod.Get))
+            {
+                <div class="form-group from-inline">
+                    Tìm sản phẩm : @Html.TextBox("keyword", "", new { @class ="form-cotrol"})
+                    <input type="submit" class="btn btn-default" value="Search"/>
+                </div>
+            }
+
+
+<div class="row">
+
+    <div class="col-md-3 col-sm-6">
+        <a href="@Url.Action("xemchitiet", new { Mahang = Model.Mahang })">
+            <img src="@Url.Content("~" + Model.Anhbia.ToString())" class="img-responsive" alt="Model.Tensp" width="400" height="400" />
+        </a>
+        <center>
+            <h3>Model.Tensp</h3>
+            <h3 style="color:red">Giá: @String.Format("{0:0,0}", Model.Giatien) VND</h3>
+            <br />
+            @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = Model.Masp, @strURL = Request.Url.ToString() }))
+            {
+                <input type="submit" value="Mua hàng" id="bgnGioHang" class="btn btn-primary" />
+                }
+            
+        </center>
+</div>
+</div>
+
+@section scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function performSearch() {
+            var searchQuery = $('#searchQuery').val();
+            $.ajax({
+                url: '@Url.Action("Search", "Sanpham")',
+                type: 'GET',
+                data: { searchQuery: searchQuery },
+                success: function (data) {
+                    $('#searchResults').html(data);
+                }
+            });
+        }
+    </script>
+}
